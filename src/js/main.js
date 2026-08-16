@@ -490,12 +490,12 @@ const ProductAPI = {
       );
       if (response.ok) {
         const data = await response.json();
-        const rawProducts = data.data || data.products || [];
+        const rawProducts = data.results || data.products || [];
         if (rawProducts.length > 0) {
           return {
-            count: data.count || rawProducts.length,
-            page: data.page || 1,
-            pageSize: data.pageSize || 24,
+            count: rawProducts.length,
+            page: 1,
+            pageSize: 24,
             products: rawProducts.map((p) => this.formatProduct(p)),
           };
         }
@@ -587,7 +587,7 @@ const ProductAPI = {
       );
       if (response.ok) {
         const data = await response.json();
-        const rawProducts = data.data || data.products || [];
+        const rawProducts = data.results || data.products || [];
         if (rawProducts.length > 0) {
           return {
             count: data.count || rawProducts.length,
@@ -657,29 +657,29 @@ const ProductAPI = {
 
   formatProduct(raw) {
     return {
-      barcode: raw.code || raw._id,
-      name: raw.product_name || raw.product_name_en || "Unknown Product",
-      brand: raw.brands || "",
+      barcode: raw.code || raw._id || raw.barcode, 
+      name: raw.product_name|| raw.name || raw.product_name_en || "Unknown Product",
+      brand: raw.brands|| raw.brand || "",
       categories: raw.categories || "",
-      image: raw.image_front_url || raw.image_url || null,
+      image: raw.image_front_url || raw.image || raw.image_url || null,
       thumbnailImage: raw.image_front_small_url || raw.image_small_url || null,
-      nutritionGrade: raw.nutrition_grades || raw.nutrition_grade_fr || null,
-      novaGroup: raw.nova_group || null,
+      nutritionGrade: raw.nutrition_grades || raw.nutritionGrade || raw.nutrition_grade_fr || null,
+      novaGroup: raw.nova_group || raw.novaGroup || null,
       ecoscore: raw.ecoscore_grade || null,
       ingredients: raw.ingredients_text || raw.ingredients_text_en || "",
       allergens: raw.allergens || "",
       quantity: raw.quantity || "",
       servingSize: raw.serving_size || "",
       nutrition: {
-        calories: raw.nutriments?.["energy-kcal_100g"] || raw.nutriments?.energy_100g || 0,
-        fat: raw.nutriments?.fat_100g || 0,
+        calories: raw.nutriments?.["energy-kcal_100g"] || raw.nutriments?.energy_100g || raw.nutrients.calories || 0,
+        fat: raw.nutriments?.fat_100g || raw.nutrients.fat || 0,
         saturatedFat: raw.nutriments?.["saturated-fat_100g"] || 0,
-        carbs: raw.nutriments?.carbohydrates_100g || 0,
-        sugar: raw.nutriments?.sugars_100g || 0,
-        fiber: raw.nutriments?.fiber_100g || 0,
-        protein: raw.nutriments?.proteins_100g || 0,
+        carbs: raw.nutriments?.carbohydrates_100g || raw.nutrients.carbs || 0,
+        sugar: raw.nutriments?.sugars_100g || raw.nutrients.sugar || 0,
+        fiber: raw.nutriments?.fiber_100g || raw.nutrients.fiber || 0,
+        protein: raw.nutriments?.proteins_100g || raw.nutrients.protein || 0,
         salt: raw.nutriments?.salt_100g || 0,
-        sodium: raw.nutriments?.sodium_100g || 0,
+        sodium: raw.nutriments?.sodium_100g || raw.nutrients.sodium || 0,
       },
       labels: raw.labels || "",
       origins: raw.origins || "",
