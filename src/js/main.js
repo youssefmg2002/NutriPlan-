@@ -2800,9 +2800,9 @@ class NutriPlanApp {
           <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <i class="fa-solid fa-utensils text-gray-300 text-2xl"></i>
           </div>
-          <p class="text-gray-800 font-bold text-base mb-1">No food logged today</p>
-          <p class="text-gray-400 text-xs mb-5">Start tracking your nutrition by logging meals or scanning products</p>
-          <div class="flex justify-center gap-3">
+          <p class="text-gray-800 font-bold text-base mb-1 mt-4">No food logged today</p>
+          <p class="text-gray-400 text-xs mb-5 mt-4">Start tracking your nutrition by logging meals or scanning products</p>
+          <div class="flex justify-center gap-3 mt-4">
             <button id="foodlog-browse-recipes-btn" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all font-medium text-sm shadow-sm cursor-pointer">
               <i class="fa-solid fa-plus"></i>
               Browse Recipes
